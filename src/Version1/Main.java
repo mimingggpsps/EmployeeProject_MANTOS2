@@ -1,4 +1,4 @@
-import Version1.HourlyEmployee;
+package Version1;
 
 public class Main {
 

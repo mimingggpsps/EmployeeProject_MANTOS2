@@ -1,29 +1,36 @@
-public class CommissionEmployee {
+package Version1;
+
+public class BasePlusCommissionEmployee {
 
     private int empID;
     private String empName;
     private double totalSale;
+    private double baseSalary;
 
 
-    public CommissionEmployee() {
+    public BasePlusCommissionEmployee() {
         empID = 0;
         empName = "N/A";
         totalSale = 0;
+        baseSalary = 0;
     }
 
 
-    public CommissionEmployee(int empID, String empName) {
+    public BasePlusCommissionEmployee(int empID, String empName) {
         this.empID = empID;
         this.empName = empName;
         totalSale = 0;
+        baseSalary = 0;
     }
 
 
-    public CommissionEmployee(int empID, String empName,
-                              double totalSale) {
+    public BasePlusCommissionEmployee(int empID, String empName,
+                                      double totalSale,
+                                      double baseSalary) {
         this.empID = empID;
         this.empName = empName;
         setTotalSale(totalSale);
+        setBaseSalary(baseSalary);
     }
 
 
@@ -39,6 +46,10 @@ public class CommissionEmployee {
         return totalSale;
     }
 
+    public double getBaseSalary() {
+        return baseSalary;
+    }
+
 
     public void setEmpID(int empID) {
         this.empID = empID;
@@ -51,6 +62,12 @@ public class CommissionEmployee {
     public void setTotalSale(double totalSale) {
         if (totalSale >= 0) {
             this.totalSale = totalSale;
+        }
+    }
+
+    public void setBaseSalary(double baseSalary) {
+        if (baseSalary >= 0) {
+            this.baseSalary = baseSalary;
         }
     }
 
@@ -72,16 +89,17 @@ public class CommissionEmployee {
             commissionRate = 0.20;
         }
 
-        return totalSale * commissionRate;
+        return baseSalary + (totalSale * commissionRate);
     }
 
 
-    public void displayCommissionEmployee() {
+    public void displayBasePlusCommissionEmployee() {
         System.out.printf(
-                "ID: %d | Name: %s | Total Sales: ₱%.2f%n",
+                "ID: %d | Name: %s | Total Sales: ₱%.2f | Base Salary: ₱%.2f%n",
                 empID,
                 empName,
-                totalSale
+                totalSale,
+                baseSalary
         );
     }
 
@@ -105,10 +123,11 @@ public class CommissionEmployee {
         }
 
         return String.format(
-                "CommissionEmployee [ID: %d, Name: %s, Total Sales: ₱%.2f, Commission Rate: %.0f%%, Commission Salary: ₱%.2f]",
+                "Version1.BasePlusCommissionEmployee [ID: %d, Name: %s, Sales: ₱%.2f, Base Salary: ₱%.2f, Commission Rate: %.0f%%, Total Salary: ₱%.2f]",
                 empID,
                 empName,
                 totalSale,
+                baseSalary,
                 commissionRate * 100,
                 computeSalary()
         );

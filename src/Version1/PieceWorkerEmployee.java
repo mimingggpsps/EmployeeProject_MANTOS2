@@ -1,3 +1,5 @@
+package Version1;
+
 public class PieceWorkerEmployee {
 
     private int empID;
@@ -98,7 +100,7 @@ public class PieceWorkerEmployee {
     @Override
     public String toString() {
         return String.format(
-                "PieceWorkerEmployee [ID: %d, Name: %s, Pieces: %d, Rate: ₱%.2f, Total Salary: ₱%.2f]",
+                "Version1.PieceWorkerEmployee [ID: %d, Name: %s, Pieces: %d, Rate: ₱%.2f, Total Salary: ₱%.2f]",
                 empID,
                 empName,
                 totalPiecesFinished,
