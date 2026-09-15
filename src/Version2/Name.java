@@ -8,7 +8,7 @@ public class Name {
 
     public Name() {
         firstName = "N/A";
-        middleName = "";
+        middleName = "N/A";
         lastName = "N/A";
         suffix = "";
     }
@@ -16,6 +16,13 @@ public class Name {
     public Name(String firstName, String lastName) {
         this.firstName = firstName;
         this.middleName = "N/A";
+        this.lastName = lastName;
+        this.suffix = "";
+    }
+
+    public Name(String firstName, String middleName, String lastName) {
+        this.firstName = firstName;
+        this.middleName = middleName;
         this.lastName = lastName;
         this.suffix = "";
     }
@@ -43,7 +50,6 @@ public class Name {
         return suffix;
     }
 
-
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -60,13 +66,19 @@ public class Name {
         this.suffix = suffix;
     }
 
+    public void displayName() {
+        System.out.println(this.toString());
+    }
+
     @Override
     public String toString() {
-        return "Name{" +
-                "firstName='" + firstName + '\'' +
-                ", middleName='" + middleName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", suffix='" + suffix + '\'' +
-                '}';
+        String result = lastName + ", " + firstName;
+        if (!middleName.equals("") && !middleName.equals("N/A")) {
+            result += " " + middleName.charAt(0) + ".";
+        }
+        if (!suffix.equals("")) {
+            result += " " + suffix;
+        }
+        return result;
     }
 }
