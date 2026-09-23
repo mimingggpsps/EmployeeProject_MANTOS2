@@ -105,13 +105,13 @@ public class EmployeeRoster {
     }
 
     public void displayHE() {
-            for(int i = 0; i < count; i++) {
-                if(emplist[i] instanceof HourlyEmployee) {
-          HourlyEmployee emp = (HourlyEmployee) emplist[i];
-          emp.displayHourlyEmployee();
-                }
+        for(int i = 0; i < count; i++) {
+            if(emplist[i] instanceof HourlyEmployee) {
+                HourlyEmployee emp = (HourlyEmployee) emplist[i];
+                emp.displayHourlyEmployee();
             }
         }
+    }
 
 
     public void displayPWE() {
@@ -174,7 +174,7 @@ public class EmployeeRoster {
                 salary = he.computeSalary(currentMonth);
             } else {
                 category = "Unknown";
-                salary = emp.computeSalary(currentMonth);
+                salary = 0.0;
             }
 
         }

@@ -1,82 +1,153 @@
 package Version4;
 
+
+import java.util.Objects;
+
+
 public class CommissionEmployee extends Employee {
+
 
     private double totalSale;
 
+
     public CommissionEmployee() {
         super();
-        totalSale = 0;
+        this.totalSale = 0.0;
     }
 
-    public CommissionEmployee(int empID, Name empName, MyDate birthDate, MyDate dateHired, double totalSale) {
-        this.totalSale = totalSale;
+
+    public CommissionEmployee(
+            int empID,
+            Name empName,
+            MyDate birthDate,
+            MyDate dateHired,
+            double totalSale) {
+
+
+        super(empID, empName, birthDate, dateHired);
+
+
+        setTotalSale(totalSale);
     }
+
 
     public double getTotalSale() {
         return totalSale;
     }
 
+
     public void setTotalSale(double totalSale) {
-        if (totalSale >= 0) {
+
+
+        if (totalSale < 0) {
+            this.totalSale = 0;
+        } else {
             this.totalSale = totalSale;
         }
     }
 
+
     public double getCommissionRate() {
 
+
+        double rate;
+
+
         if (totalSale < 50000) {
-            return 0.05;
+            rate = 0.05;
         } else if (totalSale < 100000) {
-            return 0.10;
+            rate = 0.10;
         } else if (totalSale < 500000) {
-            return 0.15;
+            rate = 0.15;
         } else {
-            return 0.20;
+            rate = 0.20;
         }
+
+
+        return rate;
     }
 
-    @Override
+
     public double computeSalary(int currentMonth) {
 
-        double commission =
+
+        double salary =
                 totalSale * getCommissionRate();
 
-        return commission + super.computeSalary(currentMonth);
+
+        if (getBirthDate().getMonth() == currentMonth) {
+            salary += 5000;
+        }
+
+
+        return salary;
     }
+
 
     public void displayCommissionEmployee() {
-
-        displayEmployee();
-
-        System.out.printf("Total Sale: %.2f%n", totalSale);
-        System.out.printf("Commission Rate: %.2f%%%n", getCommissionRate() * 100);
-        System.out.printf("Salary: %.2f%n", computeSalary());
+        System.out.println(
+                "CommissionEmployee{" +
+                        "empID = " + getEmpID() +
+                        ", empName = '" + getEmpName() + '\'' +
+                        ", birthDate = '" + getBirthDate() + '\'' +
+                        ", dateHired = '" + getDateHired() + '\'' +
+                        ", totalSale = " + totalSale +
+                        '}'
+        );
     }
+
 
     @Override
     public String toString() {
-        return "CommissionEmployee [" + super.toString() + ", Sale: " + String.format("%.2f", totalSale) + ", Commission Rate: " + String.format("%.2f", getCommissionRate() * 100) + "%, Salary: " + String.format("%.2f", computeSalary()) + "]";
+        return "CommissionEmployee{" +
+                "empID = " + getEmpID() +
+                ", empName = '" + getEmpName() + '\'' +
+                ", birthDate = '" + getBirthDate() + '\'' +
+                ", dateHired = '" + getDateHired() + '\'' +
+                ", totalSale = " + totalSale +
+                ", salary = " + computeSalary(6) +
+                '}';
     }
+
 
     @Override
     public boolean equals(Object obj) {
+
+
+        if (this == obj) {
+            return true;
+        }
+
+
+        if (!super.equals(obj)) {
+            return false;
+        }
+
 
         if (!(obj instanceof CommissionEmployee)) {
             return false;
         }
 
+
         CommissionEmployee other =
                 (CommissionEmployee) obj;
 
-        return super.equals(other)
-                && totalSale == other.totalSale;
+
+        return Double.compare(
+                totalSale,
+                other.totalSale
+        ) == 0;
     }
+
 
     @Override
     public int hashCode() {
-        return super.hashCode() + (int) totalSale;
+        return Objects.hash(
+                super.hashCode(),
+                totalSale
+        );
     }
+
 
     @Override
     public CommissionEmployee clone() {
